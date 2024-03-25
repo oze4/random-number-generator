@@ -1,0 +1,19 @@
+html,
+body,
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 5;
+}
+
+#entropy {
+  height: 60%;
+  width: 40%;
+  border: 1px solid black;
+  margin: 10px 0 0 10px;
+}
+
+#counter {
+  font-size: xx-large;
+  margin-left: 20%;
+}
