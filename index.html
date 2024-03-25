@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="index.css">
-  <title>random-number-generator</title>
-</head>
-<body>
-  <div>
-    <label for="min">Minimum</label>
-    <input id="min" name="min" type="number" min="0" step="1" value="0" />
-  </div>
-  <div>
-    <label for="max">Maximum</label>
-    <input id="max" name="max" type="number" min="1" step="1" value="10" />
-  </div>
-  <div>
-    <p id="counter"></p>
-  </div>
-  <div class="container">
-    <canvas id="entropy"></canvas>
-  </div>
-  <script src="index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="index.css" />
+    <title>random-number-generator</title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <form class="needs-validation">
+            <div class="input-group my-3">
+              <span class="input-group-text">Minimum</span>
+              <input class="form-control" id="min" type="number" min="0" step="1" value="0" required/>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">Maximum</span>
+              <input class="form-control" id="max" type="number" min="1" step="1" value="10" required/>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-5 mb-3">
+        <div class="col-md-4 offset-md-4">
+          Counter:
+          <p id="counter">0</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-xs-12 col-md-10 offset-md-1 card">
+          <canvas id="entropy"></canvas>
+        </div>
+      </div>
+    </div>
+    <script src="bootstrap.min.js"></script>
+    <script src="index.js"></script>
+  </body>
 </html>

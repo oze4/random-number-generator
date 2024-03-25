@@ -8,11 +8,13 @@ entropyEl.addEventListener("mouseenter", handleEntropyOnMouseEnter);
 entropyEl.addEventListener("mouseleave", handleEntropyOnMouseLeave);
 entropyEl.addEventListener("mousemove", handleEntropyOnMouseMove);
 
-
-const timer = new CountdownTimer(3);
 const counterEl = document.getElementById("counter");
+const timer = new CountdownTimer(10);
 timer.addEventListener("ontick", handleTimerOnTick);
 timer.addEventListener("oncomplete", handleTimeOnComplete);
+
+const entropyArray = [];
+
 /**
  * Event Handlers
  */
@@ -22,17 +24,15 @@ function handleTimerOnTick(remainingTime) {
 }
 
 function handleTimeOnComplete() {
-  alert("done!");
+  console.log({entropyArray});
+  const randomNumber = getRandomIntInRange(0, 10, Number(entropyArray.join("")))
+  console.log({randomNumber})
 }
 
 function handleEntropyOnMouseEnter(event) {
   this.style.border = "10px solid green";
   if (timer.isPaused) {
     timer.resume();
-  } else if (timer.isComplete) {
-    //entropyElContext.clearRect(0, 0, entropyElContext.canvas.width, entropyElContext.canvas.height);
-    //timer.reset();
-    //timer.start();
   } else {
     timer.start();
   }
@@ -47,7 +47,8 @@ function handleEntropyOnMouseMove(event) {
   if (timer.isComplete) {
     return;
   }
-  const mouse = getMousePosition(entropyEl, event)
+  const mouse = getMousePosition(entropyEl, event);
+  generateEntropyViaMousePosition(mouse.x, mouse.y, entropyArray);
   drawMouseMovementsOnCanvas(entropyElContext, mouse.x, mouse.y, {
     lineWidth: 2
   });
@@ -56,6 +57,28 @@ function handleEntropyOnMouseMove(event) {
 /**
  * Misc functions
  */
+
+function generateEntropyViaMousePosition(mouseX, mouseY, results=[]) {
+  /*
+  const windowSum = window.innerHeight + window.innerWidth;
+  const mouseSum = mouseX + mouseY;
+  results.push(Math.round((mouseSum/windowSum)*255));
+  shuffleArray(results);
+  */
+  let t1 = numberToBinary(Date.now());
+  let x = numberToBinary(Math.round(mouseX));
+  let y = numberToBinary(Math.round(mouseY));
+  let t2 = numberToBinary(Date.now());
+  t1 = t1.slice(t1.length-4||0);
+  t2 = t2.slice(t2.length-4||0);
+  x = x.slice(x.length-4||0);
+  y = y.slice(y.length-4||0);
+  results.push(t1+t2+x+y);
+}
+
+function numberToBinary(n) {
+  return n.toString(2);
+}
 
 function getMousePosition(canvasEl, event) {
   const rect = canvasEl.getBoundingClientRect();
